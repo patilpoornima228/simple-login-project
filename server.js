@@ -1,33 +1,26 @@
-const express = require("express");
-const path = require("path");
-const app = express();
+const express=require("express")
 
-app.use("/css", express.static(path.join(__dirname,"css")));
-app.use("/js", express.static(path.join(__dirname,"js")));
+const app=express()
+const port=3000
+app.listen(port,()=>{
+    console.log("server is running port number 3000")
+})
+
+//api creation syntax : server.method(path,callback)
+//#crud
+app.get("/",(req,res)=>{
+    res.send("<h1>welcome to my college...</h1>")
+})
 
 app.get("/",(req,res)=>{
-    res.sendFile(path.join(__dirname,"views","home.html"));
-});
+    res.send("<h1>welcome to my college...</h1>")
+})
 
-app.get("/login", (req,res)=>{
-    res.sendFile(path.join(__dirname,"views","login.html"));
-});
-
-app.get("/signup",(req,res)=>{
-    res.sendFile(path.join(__dirname,"views","signup.html"));
-});
-
-app.get("/api/student",(req,res)=>{
+app.post("/student",(req,res)=>{
     res.json({
-        id:1,
-        name:"poorni",
-        course:"phython"
+        message:"student added sucessfully",
+        data:req.body
+
     });
 });
-
-app.listen(5000,()=>{
-    console.log("Server Running on Port 5000");
-});
-
-
 
